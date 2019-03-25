@@ -1,3 +1,7 @@
+#Andrew ID: macea 
+#Acknowledgements: Lead TA Austin (ashick) for his Module Manager that
+#saves us the pain of installing all these modules!
+
 # #Austin's all powerful module manager
 import module_manager
 module_manager.review()
