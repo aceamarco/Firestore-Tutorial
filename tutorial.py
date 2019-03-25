@@ -15,7 +15,7 @@ import time
 
 
 #From the Google Cloud Documentation
-#First create a service account, generate a new private key and save the JSON file to this folder.
+#First create a service account, generate a new private key and save the .JSON file to this folder.
 #If you're going to change the name of the file, change the file name on line 20
 #Use this link: https://console.cloud.google.com/iam-admin/serviceaccounts
 # Use a service account
@@ -42,16 +42,16 @@ doc_ref.set({
 })
 
 
-
+'''
 #To read data you can see it online or by using the following code
 users_ref = db.collection(u'users')
 docs = users_ref.get()
 #doc.id is the name of the document, doc.to_dict returns all of its attributes
 for doc in docs:
     print(u'{} => {}'.format(doc.id, doc.to_dict()))
+'''
 
-
-
+'''
 data = {
     u'name': u'Los Angeles',
     u'state': u'CA',
@@ -66,9 +66,9 @@ city_ref = db.collection(u'cities').document(u'BJ')
 city_ref.set({
     'capital': True
 },merge = True)
+'''
 
-
-
+'''
 #Here are all the types of data you can store in Firestore
 data = {
     u'stringExample': u'Hello, World!',
@@ -84,9 +84,9 @@ data = {
 }
 
 db.collection(u'data').document(u'one').set(data)
+'''
 
-
-
+'''
 #Example of how to create objects and then add them to the database
 class Person(object):
 
@@ -107,15 +107,15 @@ class Person(object):
 #You can set the dictionary containing the objects attributes to the database
 me = Person(age = 21)
 db.collection(u'users').document(u'Marco').set(me.to_dict())
+'''
 
-
-
+'''
 #To Update information
 ref = db.collection(u'users').document(u'Marco')
 ref.update({u'age':19})
+'''
 
-
-
+'''
 #To update dictionaries (From the Google Documentation)
 # Create an initial document to update
 frank_ref = db.collection(u'users').document(u'frank')
@@ -128,52 +128,54 @@ frank_ref.set({
     },
     u'age': 12
 })
+'''
 
-
-
-# Update age and favorite color
+'''
+# Update age and favorite color (which is a nested dictionary, by using the dot-notation)
 frank_ref.update({
     u'age': 13,
     u'favorites.color': u'Red'
 })
+'''
 
-
-
+'''
 #To Update Arrays
 city_ref = db.collection(u'cities').document(u'DC')
 city_ref.set({u'regions':['east_coast']})
 
-# Atomically add a new region to the 'regions' array field.
+# Automatically add a new region to the 'regions' array field.
 city_ref.update({u'regions': ArrayUnion([u'greater_virginia'])})
 
-# // Atomically remove a region from the 'regions' array field.
+# // Automatically remove a region from the 'regions' array field.
 #Uncomment this line to remove the east_cost property
 #city_ref.update({u'regions': ArrayRemove([u'east_coast'])})
+'''
 
-
+'''
 #To delete attributes from a document use .DELETE_FIELD
 city_ref = db.collection(u'cities').document(u'BJ')
 city_ref.update({
     u'capital': firestore.DELETE_FIELD
 })
+'''
 
-
-
+'''
 #This is how you create a Python object from the values in the database
 doc_ref = db.collection(u'users').document(u'Marco')
 doc = doc_ref.get()
 
 person = Person.from_dict(document = doc.to_dict())
 print(person)
+'''
 
-
-
+'''
 #This is how you query, or filter through a collection for specific documents
 #.where() can also use u'<', u'>', u'==', u'<=', u'>=', and u'array_contains'
 user_collection = db.collection(u'users')
 query = user_collection.where(u'age', u'==', 21)
+'''
 
-
+'''
 #This is how you "listen" to your documents. First we'll set up a query and then
 #begin listening to it with this code from the google cloud website!
 # This function continuously reacts to changes in a query you ran.
@@ -205,5 +207,10 @@ data = {
     u'population': 860000
 }
 db.collection(u'cities').document(u'SF').set(data)
+#Try this code with the forever loop below, if you try acessing this database
+#from somewhere else this code should be updating live!
+# while(True):
+#     pass
 time.sleep(1)
 query_watch.unsubscribe()
+'''
