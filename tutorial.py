@@ -22,7 +22,7 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-'''
+
 #Add Info
 doc_ref = db.collection(u'users').document(u'alovelace')
 doc_ref.set({
@@ -38,7 +38,7 @@ doc_ref.set({
     u'last': u'Turing',
     u'born': 1912
 })
-'''
+
 
 '''
 #To read data you can see it online or by using the following code
@@ -47,15 +47,15 @@ docs = users_ref.get()
 #doc.id is the name of the document, doc.to_dict returns all of its attributes
 for doc in docs:
     print(u'{} => {}'.format(doc.id, doc.to_dict()))
+'''
 
+'''
 data = {
     u'name': u'Los Angeles',
     u'state': u'CA',
     u'country': u'USA'
 }
-'''
 
-'''
 # Add a new doc in collection 'cities' with ID 'LA'
 db.collection(u'cities').document(u'LA').set(data)
 
