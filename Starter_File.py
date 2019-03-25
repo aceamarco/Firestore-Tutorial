@@ -1,17 +1,17 @@
+#This file is meant to just set up the database, you're free to 
+#start working with it however you like!
+
 # #Austin's all powerful module manager
 import module_manager
 module_manager.review()
-
+#Firestore modules
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from google.cloud.firestore_v1beta1 import ArrayRemove, ArrayUnion
+#Python Modules
 import datetime
 import time
-
-###################################################################
-#Uncomment the chuncks of code as you proceed through the document#
-###################################################################
 
 
 #From the Google Cloud Documentation
@@ -23,3 +23,5 @@ cred = credentials.Certificate('serviceAccount.json')
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+
+####Begin Writing your own code here#####
